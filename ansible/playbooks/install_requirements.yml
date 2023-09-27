@@ -1,0 +1,11 @@
+---
+- hosts: master
+  become: true
+  vars:
+    sys_packages: ['vim', 'git', 'curl' , 'unzip', 'terraform', 'Python PIP', 'Ansible', 'boto']
+  tasks :
+    - name: Install Packages
+      apt:
+        name: "{{ syc_packages }}"
+        update_cache: yes
+        state: latest

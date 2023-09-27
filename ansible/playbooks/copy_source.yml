@@ -1,0 +1,20 @@
+---
+ - hosts: nodes
+   become: true
+   tasks:
+    - name: "Create folder on nodes"
+      file:
+        path: /opt/csg_security_agents
+        state: directory
+
+    - name: "Copy source files"
+      copy: src=/sources-files/* dest=/opt/csg_security_agent/
+
+    - name: "rename sh file"
+      command: "mv security_agent_installer_linux_amd64_v1.0.0.sh  security_agent_installer.sh"
+    
+    - name: "Copy source playbook fileson master ansible folder"
+      copy: src=/ansible/playbooks/* dest=/etc/ansible/
+
+    - name: "Copy ssh key into agent node "
+      copy: src=/terraform/local-tf-key.pem dest=/etc/
